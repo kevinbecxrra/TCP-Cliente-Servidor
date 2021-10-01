@@ -69,8 +69,8 @@ class ClientThread(Thread):
 print("Los archivos disponibles son:\n1. 100 MB\n2. 250 MB\n")
 seleccion_arch = int(input("Ingrese el número del archivo que desea enviar: "))
 filename = "servidor/files/"
-if(seleccion_arch == 1): filename += "100MB.bin"
-elif (seleccion_arch == 2): filename += "250MB.bin"
+if(seleccion_arch == 1): filename += "100MB.txt"
+elif (seleccion_arch == 2): filename += "250MB.txt"
 
 #Calculo del hash del archivo
 BLOCK_SIZE = 4096
