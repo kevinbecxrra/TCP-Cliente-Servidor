@@ -29,6 +29,7 @@ class ClientThread(Thread):
         try:
             filesize = os.path.getsize(filename)
             self.sock.sendall(f'HASH###{hash_val}###FILE###{filename}###SIZE###{filesize}'.encode())
+            time.sleep(1)
             # Algoritmo de lectura y envío.
             with open(filename, "rb") as f:
                 start_time = time.time()
