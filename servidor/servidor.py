@@ -119,7 +119,7 @@ fecha = datetime.now()
 filesize = os.path.getsize(filename)
 log_name = f"{fecha.year}-{fecha.month}-{fecha.day}-{fecha.hour}-{fecha.minute}-{fecha.second}-log.txt"
 
-file_log = open(f"servidor/Logs/{log_name}", "w")
+file_log = open(f"servidor/Logs/{log_name}", "x")
 
 file_log.write(f"LOG {fecha}\n\n")
 file_log.write(f"Archivo enviado: {filename.split('/')[2]}\n")
