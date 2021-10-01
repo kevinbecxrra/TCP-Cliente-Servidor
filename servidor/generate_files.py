@@ -3,7 +3,7 @@ texto = b"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luct
 text_size = len(texto)
 print(text_size)
 
-fh = open("files/100MB.txt", "wb")
+fh = open("100MB.txt", "wb")
 num_bytes = 0
 while num_bytes < 100000000:
     fh.write(texto)
@@ -11,7 +11,7 @@ while num_bytes < 100000000:
 fh.close()
 
 
-fh = open("files/250MB.txt", "wb")
+fh = open("250MB.txt", "wb")
 num_bytes = 0
 while num_bytes < 250000000:
     fh.write(texto)
