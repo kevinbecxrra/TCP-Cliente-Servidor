@@ -38,7 +38,7 @@ class ServerThread(Thread):
         try:
             conn_info = dict()
             self.sock.bind((TCP_IP, self.port))
-            self.sock.connect((TCP_IP, SERVER_PORT))
+            self.sock.connect((SERVER_IP, SERVER_PORT))
             print(f"Conexión establecida con el servidor {(TCP_IP, SERVER_PORT)}. Cliente {self.id} listo para recibir")
         
             data = self.sock.recv(BUFFER_SIZE)
