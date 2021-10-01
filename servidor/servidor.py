@@ -97,8 +97,7 @@ tcpsock.listen(5)
 print ("Servidor escuchando en el puerto", TCP_PORT) 
 
 id = 0
-while True:
-    if len(threads) >= num_clientes: break
+while len(threads) < num_clientes:
     try:
         (conn, (ip,port)) = tcpsock.accept() 
         newthread = ClientThread(id,ip,port,conn, filename) 
