@@ -1,81 +1,63 @@
 import socket
-import hashlib
 import traceback
 import time
 from threading import Thread
 from datetime import datetime
 
-TCP_IP = '0.0.0.0' #Parámetro para fijar dirección genérica en la configuración del socket. Es IP genérica pues no depende de otro servidor para responder.
-TCP_PORT = 3000 #Puerto TCP de escucha (recepción de peticiones) en el servidor.
+UDP_IP = '0.0.0.0' #Parámetro para fijar dirección genérica en la configuración del socket. Es IP genérica pues no depende de otro servidor para responder.
+UDP_PORT = 3000 #Puerto TCP de escucha (recepción de peticiones) en el servidor.
 BUFFER_SIZE = 4096 #tamaño del buffer de empaquetamiento en máquina.
 SERVER_IP = input("Ingrese la dirección IP del servidor: ")
 SERVER_PORT = 8000
+SERVER_ADDRESS = (SERVER_IP, SERVER_PORT)
 BLOCK_SIZE = 4096
 DOWNLOADS_PATH = "cliente/ArchivosRecibidos/"
 
 log_info = []
 file_dict = dict()
 
-def hash(filename):
-    file_hash = hashlib.sha256() # Create the hash object, can use something other than `.sha256()` if you wish
-    with open(filename, 'rb') as f: # Open the file to read it's bytes
-        fb = f.read(BLOCK_SIZE) # Read from the file. Take in the amount declared above
-        while len(fb) > 0: # While there is still data being read from the file
-            file_hash.update(fb) # Update the hash
-            fb = f.read(BLOCK_SIZE) # Read the next block from the file
-    f.close()
-    hash_val = file_hash.hexdigest()
-    return hash_val
 
 class ServerThread(Thread):
     def __init__(self,id,sock):
         Thread.__init__(self)
         self.id = id
         self.sock = sock
-        self.port = TCP_PORT+self.id
+        self.port = UDP_PORT+self.id
 
     def run(self):        
         try:
             conn_info = dict()
-            self.sock.bind((TCP_IP, self.port))
-            self.sock.connect((SERVER_IP, SERVER_PORT))
-            print(f"Conexión establecida con el servidor {(TCP_IP, SERVER_PORT)}. Cliente {self.id} listo para recibir")
+            self.sock.bind((UDP_IP, self.port))
+            self.sock.sendto("HELLO".encode(), SERVER_ADDRESS)
+            print(f"Conexión establecida con el servidor {SERVER_ADDRESS}. Cliente {self.id} listo para recibir")
         
-            data = self.sock.recv(BUFFER_SIZE)
+            data, address = self.sock.recvfrom(BUFFER_SIZE)
             if len(data) > 0:
                 info = data.decode().split("###")
-                hash_val = info[1]
-                archivo = info[3].split("/")[2]
-                tamano = int(info[5])
+                archivo = info[1].split("/")[2]
+                tamano = int(info[3])
 
                 file_dict["name"] = archivo
                 file_dict["size"] = tamano
                 
+                # Descarga del archivo
                 file = open(f"{DOWNLOADS_PATH}Cliente{self.id}-Prueba-{num_clientes}_{archivo}", 'wb')
+                print(f"Cliente {self.id} descargando archivo {(archivo,tamano)}")
                 recibidos = 0
                 start_time = time.time()
-                while recibidos < tamano:
-                    descarga = self.sock.recv(BUFFER_SIZE)
-
+                while True:
+                    descarga, address = self.sock.recvfrom(BUFFER_SIZE)
+                    if len(descarga) < 1: break
                     file.write(descarga)
                     recibidos += len(descarga)
                 finish_time = time.time()
                 file.close()
-
-                new_hash = hash(f"{DOWNLOADS_PATH}Cliente{self.id}-Prueba-{num_clientes}_{archivo}")
-                if(new_hash == hash_val):
-                    print(f"Descarga del cliente {self.id} finalizada con éxito. Valores hash coinciden")
-                    self.sock.send("HASH###OK".encode())
-                    conn_info["Transfer status"] = "Success - HASH matches"
-                else:
-                    print(f"Descarga del cliente {self.id} finalizada sin éxito. Valores hash no coinciden")
-                    self.sock.send("HASH###NOT_OK".encode())
-                    conn_info["Transfer status"] = "Error - HASH does not match"
+                print(f"Fin descarga Cliente {self.id}")
 
                 # Recoleccion de info para el log
                 
                 conn_info["Client ID"] = self.id
-                conn_info["Client IP"] = TCP_IP
+                conn_info["Client IP"] = UDP_IP
                 conn_info["Client PORT"] = self.port
                 conn_info["Transfer time"] = "%s miliseconds" % ((finish_time - start_time)*1000)
 
@@ -97,7 +79,7 @@ num_clientes = int(input("Ingrese el número de conexiones que desea realizar co
 
 threads = []
 for i in range(num_clientes):
-    mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    mysock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     connection = ServerThread(i,mysock)
     connection.start()
     threads.append(connection)

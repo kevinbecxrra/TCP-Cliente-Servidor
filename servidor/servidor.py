@@ -1,61 +1,53 @@
 import socket
-import hashlib
 import os
 import time
 import traceback
 from threading import Thread
 from datetime import datetime
 
-TCP_IP = '0.0.0.0' #Parámetro para fijar dirección genérica en la configuración del socket.
-TCP_PORT = 8000 #Puerto TCP de escucha (recepción de peticiones) en el servidor.
-BUFFER_SIZE = 4096 #tamaño del buffer de empaquetamiento en máquina.
+UDP_IP = '0.0.0.0' #Parámetro para fijar dirección genérica en la configuración del socket.
+UDP_PORT = 8000 #Puerto TCP de escucha (recepción de peticiones) en el servidor.
 
 log_info = []
 
 #Clase que establece hilos de conexión con los clientes que envíen petición de enlace.
 class ClientThread(Thread): 
 
-    def __init__(self,id,ip,port,sock, filename): 
+    def __init__(self,id,ip,port,sock,filename): 
         Thread.__init__(self) 
         self.id = id
         self.ip = ip 
         self.port = port 
-        self.sock = sock 
+        self.sock = sock
         self.filename = filename
-        print (f"Nueva conexión desde{(ip,port)}. Cliente {id} listo para recibir.") #Confirmación de conexión con cada cliente.
+        print (f"Nueva conexión desde {(ip,port)}. Cliente {id} listo para recibir.") #Confirmación de conexión con cada cliente.
 
     #Función run realiza el envío del mensaje solicitado de manera persistente utilizando el socket y el hilo abierto previamente.
     def run(self): 
         try:
             filesize = os.path.getsize(filename)
-            self.sock.sendall(f'HASH###{hash_val}###FILE###{filename}###SIZE###{filesize}'.encode())
+            self.sock.sendto(f'FILE###{filename}###SIZE###{filesize}'.encode(), (self.ip, self.port))
             time.sleep(1)
             # Algoritmo de lectura y envío.
+            print(f"Enviando arvhivo a cliente {(self.ip, self.port)}")
             with open(filename, "rb") as f:
                 start_time = time.time()
                 while True:  
                     bytes_read = f.read(BUFFER_SIZE)
                     if not bytes_read:
                         break  
-                    self.sock.send(bytes_read) 
+                    self.sock.sendto(bytes_read, (self.ip, self.port)) 
                 finish_time = time.time()
 
-            hash_stat = None
-            data = self.sock.recv(BUFFER_SIZE)
-            if len(data) > 0:
-                info = data.decode().split("###")
-                if info[0] == "HASH":
-                    hash_stat = info[1]
-                self.sock.close() 
-            else:
-                raise Exception("No se recibió la confirmación del hash del cliente:", self.id)
+            time.sleep(1.5)
+            self.sock.sendto(''.encode(), (self.ip, self.port))     
 
             # Recoleccion de info para el log
             conn_info = dict()
             conn_info["Client ID"] = self.id
             conn_info["Client IP"] = self.ip
             conn_info["Client PORT"] = self.port
-            conn_info["Transfer status"] = "Success" if hash_stat == "OK" else "Error"
+            # conn_info["Transfer status"] = "Success" if hash_stat == "OK" else "Error"
             conn_info["Transfer time"] = "%s miliseconds" % ((finish_time - start_time)*1000)
 
             log_info.append(conn_info)
@@ -73,39 +65,28 @@ filename = "servidor/files/"
 if(seleccion_arch == 1): filename += "100MB.txt"
 elif (seleccion_arch == 2): filename += "250MB.txt"
 
-#Calculo del hash del archivo
-BLOCK_SIZE = 4096
-file_hash = hashlib.sha256() 
-with open(filename, 'rb') as f:
-    fb = f.read(BLOCK_SIZE) # Read from the file. Take in the amount declared above
-    while len(fb) > 0:
-        file_hash.update(fb) 
-        fb = f.read(BLOCK_SIZE) 
-f.close()
-hash_val = file_hash.hexdigest()
+#Selección tamaño de los fragmentos
+BUFFER_SIZE = int(input("Ingrese el tamaño en bytes de los fragmentos que se van a enviar (max 64 KB): "))
 
 #Selección num de clientes
 num_clientes = int(input("Ingrese el número de clientes a conectar: "))
 
 #Creación del socket
-tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-tcpsock.bind((TCP_IP, TCP_PORT)) 
+udpsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+udpsock.bind((UDP_IP, UDP_PORT)) 
 threads = [] 
 
-tcpsock.listen(5)
-print ("Servidor escuchando en el puerto", TCP_PORT) 
+print ("Servidor escuchando en el puerto", UDP_PORT) 
 
 id = 0
 while len(threads) < num_clientes:
     try:
-        (conn, (ip,port)) = tcpsock.accept() 
-        newthread = ClientThread(id,ip,port,conn, filename) 
+        data, (ip, port) = udpsock.recvfrom(512)
+        newthread = ClientThread(id,ip,port, udpsock, filename) 
         threads.append(newthread) 
         id += 1
     except:
-        #tcpsock.shutdown(socket.SHUT_RD)
-        tcpsock.close()
+        udpsock.close()
         print("Socket cerrado")
         break
 
