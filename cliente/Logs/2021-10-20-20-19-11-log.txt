@@ -1,0 +1,159 @@
+LOG 2021-10-20 20:19:11.754061
+
+SERVER IP: 0.0.0.0
+SERVER PORT: 8000
+Archivo recibido: 100MB.txt
+Tamaño archivo: 100000575 bytes
+Número de conexiones: 25
+
+Información de conexiones: 
+	Client ID: 0
+	Client IP: 0.0.0.0
+	Client PORT: 3000
+	Transfer status: Error. File size is smaller
+	Transfer time: 3013.4687423706055 miliseconds
+
+	Client ID: 1
+	Client IP: 0.0.0.0
+	Client PORT: 3001
+	Transfer status: Error. File size is smaller
+	Transfer time: 2804.2190074920654 miliseconds
+
+	Client ID: 2
+	Client IP: 0.0.0.0
+	Client PORT: 3002
+	Transfer status: Error. File size is smaller
+	Transfer time: 2832.920789718628 miliseconds
+
+	Client ID: 3
+	Client IP: 0.0.0.0
+	Client PORT: 3003
+	Transfer status: Error. File size is smaller
+	Transfer time: 2823.173999786377 miliseconds
+
+	Client ID: 4
+	Client IP: 0.0.0.0
+	Client PORT: 3004
+	Transfer status: Error. File size is smaller
+	Transfer time: 2834.744691848755 miliseconds
+
+	Client ID: 5
+	Client IP: 0.0.0.0
+	Client PORT: 3005
+	Transfer status: Error. File size is smaller
+	Transfer time: 2815.9518241882324 miliseconds
+
+	Client ID: 6
+	Client IP: 0.0.0.0
+	Client PORT: 3006
+	Transfer status: Error. File size is smaller
+	Transfer time: 2810.0509643554688 miliseconds
+
+	Client ID: 7
+	Client IP: 0.0.0.0
+	Client PORT: 3007
+	Transfer status: Error. File size is smaller
+	Transfer time: 2826.9190788269043 miliseconds
+
+	Client ID: 8
+	Client IP: 0.0.0.0
+	Client PORT: 3008
+	Transfer status: Error. File size is smaller
+	Transfer time: 2833.3630561828613 miliseconds
+
+	Client ID: 9
+	Client IP: 0.0.0.0
+	Client PORT: 3009
+	Transfer status: Error. File size is smaller
+	Transfer time: 2821.974992752075 miliseconds
+
+	Client ID: 10
+	Client IP: 0.0.0.0
+	Client PORT: 3010
+	Transfer status: Error. File size is smaller
+	Transfer time: 2824.9359130859375 miliseconds
+
+	Client ID: 11
+	Client IP: 0.0.0.0
+	Client PORT: 3011
+	Transfer status: Error. File size is smaller
+	Transfer time: 2828.8137912750244 miliseconds
+
+	Client ID: 12
+	Client IP: 0.0.0.0
+	Client PORT: 3012
+	Transfer status: Error. File size is smaller
+	Transfer time: 2829.7460079193115 miliseconds
+
+	Client ID: 13
+	Client IP: 0.0.0.0
+	Client PORT: 3013
+	Transfer status: Error. File size is smaller
+	Transfer time: 2822.923183441162 miliseconds
+
+	Client ID: 14
+	Client IP: 0.0.0.0
+	Client PORT: 3014
+	Transfer status: Error. File size is smaller
+	Transfer time: 2840.33203125 miliseconds
+
+	Client ID: 15
+	Client IP: 0.0.0.0
+	Client PORT: 3015
+	Transfer status: Error. File size is smaller
+	Transfer time: 2816.006898880005 miliseconds
+
+	Client ID: 16
+	Client IP: 0.0.0.0
+	Client PORT: 3016
+	Transfer status: Error. File size is smaller
+	Transfer time: 2811.725854873657 miliseconds
+
+	Client ID: 17
+	Client IP: 0.0.0.0
+	Client PORT: 3017
+	Transfer status: Error. File size is smaller
+	Transfer time: 2815.7148361206055 miliseconds
+
+	Client ID: 18
+	Client IP: 0.0.0.0
+	Client PORT: 3018
+	Transfer status: Error. File size is smaller
+	Transfer time: 3364.2120361328125 miliseconds
+
+	Client ID: 19
+	Client IP: 0.0.0.0
+	Client PORT: 3019
+	Transfer status: Error. File size is smaller
+	Transfer time: 2965.466022491455 miliseconds
+
+	Client ID: 20
+	Client IP: 0.0.0.0
+	Client PORT: 3020
+	Transfer status: Error. File size is smaller
+	Transfer time: 2836.463212966919 miliseconds
+
+	Client ID: 21
+	Client IP: 0.0.0.0
+	Client PORT: 3021
+	Transfer status: Error. File size is smaller
+	Transfer time: 2977.553129196167 miliseconds
+
+	Client ID: 22
+	Client IP: 0.0.0.0
+	Client PORT: 3022
+	Transfer status: Error. File size is smaller
+	Transfer time: 2840.9416675567627 miliseconds
+
+	Client ID: 23
+	Client IP: 0.0.0.0
+	Client PORT: 3023
+	Transfer status: Error. File size is smaller
+	Transfer time: 2845.1621532440186 miliseconds
+
+	Client ID: 24
+	Client IP: 0.0.0.0
+	Client PORT: 3024
+	Transfer status: Error. File size is smaller
+	Transfer time: 2859.4329357147217 miliseconds
+

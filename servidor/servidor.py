@@ -39,15 +39,14 @@ class ClientThread(Thread):
                     self.sock.sendto(bytes_read, (self.ip, self.port)) 
                 finish_time = time.time()
 
-            time.sleep(1.5)
+            time.sleep(1)
             self.sock.sendto(''.encode(), (self.ip, self.port))     
 
             # Recoleccion de info para el log
             conn_info = dict()
             conn_info["Client ID"] = self.id
             conn_info["Client IP"] = self.ip
-            conn_info["Client PORT"] = self.port
-            # conn_info["Transfer status"] = "Success" if hash_stat == "OK" else "Error"
+            conn_info["Client PORT"] = self.port            
             conn_info["Transfer time"] = "%s miliseconds" % ((finish_time - start_time)*1000)
 
             log_info.append(conn_info)
@@ -66,7 +65,8 @@ if(seleccion_arch == 1): filename += "100MB.txt"
 elif (seleccion_arch == 2): filename += "250MB.txt"
 
 #Selección tamaño de los fragmentos
-BUFFER_SIZE = int(input("Ingrese el tamaño en bytes de los fragmentos que se van a enviar (max 64 KB): "))
+bs = int(input("Ingrese el tamaño en bytes de los fragmentos que se van a enviar (max 64 KB): "))
+BUFFER_SIZE = bs if bs > 4096 else 4096
 
 #Selección num de clientes
 num_clientes = int(input("Ingrese el número de clientes a conectar: "))
@@ -79,7 +79,7 @@ threads = []
 print ("Servidor escuchando en el puerto", UDP_PORT) 
 
 id = 0
-while len(threads) < num_clientes:
+while len(threads) < num_clientes and len(threads) <= 25:
     try:
         data, (ip, port) = udpsock.recvfrom(512)
         newthread = ClientThread(id,ip,port, udpsock, filename) 

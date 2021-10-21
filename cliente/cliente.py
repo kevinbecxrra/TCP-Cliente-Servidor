@@ -42,7 +42,7 @@ class ServerThread(Thread):
                 
                 # Descarga del archivo
                 file = open(f"{DOWNLOADS_PATH}Cliente{self.id}-Prueba-{num_clientes}_{archivo}", 'wb')
-                print(f"Cliente {self.id} descargando archivo {(archivo,tamano)}")
+                print(f"Cliente {self.id} descargando archivo {archivo}")
                 recibidos = 0
                 start_time = time.time()
                 while True:
@@ -59,6 +59,7 @@ class ServerThread(Thread):
                 conn_info["Client ID"] = self.id
                 conn_info["Client IP"] = UDP_IP
                 conn_info["Client PORT"] = self.port
+                conn_info["Transfer status"] = "Success. File size matches" if recibidos == tamano else "Error. File size is smaller"
                 conn_info["Transfer time"] = "%s miliseconds" % ((finish_time - start_time)*1000)
 
                 

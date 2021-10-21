@@ -1,0 +1,132 @@
+LOG 2021-10-20 20:19:11.753824
+
+Archivo enviado: 100MB.txt
+Tamaño archivo: 100000575 bytes
+Número de conexiones: 25
+
+Información de conexiones: 
+	Client ID: 0
+	Client IP: 127.0.0.1
+	Client PORT: 3000
+	Transfer time: 508.93425941467285 miliseconds
+
+	Client ID: 1
+	Client IP: 127.0.0.1
+	Client PORT: 3001
+	Transfer time: 302.0977973937988 miliseconds
+
+	Client ID: 2
+	Client IP: 127.0.0.1
+	Client PORT: 3002
+	Transfer time: 326.1137008666992 miliseconds
+
+	Client ID: 3
+	Client IP: 127.0.0.1
+	Client PORT: 3003
+	Transfer time: 319.08464431762695 miliseconds
+
+	Client ID: 4
+	Client IP: 127.0.0.1
+	Client PORT: 3004
+	Transfer time: 333.4660530090332 miliseconds
+
+	Client ID: 5
+	Client IP: 127.0.0.1
+	Client PORT: 3005
+	Transfer time: 310.79602241516113 miliseconds
+
+	Client ID: 6
+	Client IP: 127.0.0.1
+	Client PORT: 3006
+	Transfer time: 304.9740791320801 miliseconds
+
+	Client ID: 7
+	Client IP: 127.0.0.1
+	Client PORT: 3007
+	Transfer time: 331.96496963500977 miliseconds
+
+	Client ID: 8
+	Client IP: 127.0.0.1
+	Client PORT: 3008
+	Transfer time: 331.5441608428955 miliseconds
+
+	Client ID: 9
+	Client IP: 127.0.0.1
+	Client PORT: 3009
+	Transfer time: 318.8281059265137 miliseconds
+
+	Client ID: 10
+	Client IP: 127.0.0.1
+	Client PORT: 3010
+	Transfer time: 321.77090644836426 miliseconds
+
+	Client ID: 11
+	Client IP: 127.0.0.1
+	Client PORT: 3011
+	Transfer time: 323.0259418487549 miliseconds
+
+	Client ID: 12
+	Client IP: 127.0.0.1
+	Client PORT: 3012
+	Transfer time: 323.52685928344727 miliseconds
+
+	Client ID: 13
+	Client IP: 127.0.0.1
+	Client PORT: 3013
+	Transfer time: 321.57111167907715 miliseconds
+
+	Client ID: 14
+	Client IP: 127.0.0.1
+	Client PORT: 3014
+	Transfer time: 337.2640609741211 miliseconds
+
+	Client ID: 15
+	Client IP: 127.0.0.1
+	Client PORT: 3015
+	Transfer time: 311.8252754211426 miliseconds
+
+	Client ID: 16
+	Client IP: 127.0.0.1
+	Client PORT: 3016
+	Transfer time: 310.2538585662842 miliseconds
+
+	Client ID: 17
+	Client IP: 127.0.0.1
+	Client PORT: 3017
+	Transfer time: 313.5571479797363 miliseconds
+
+	Client ID: 18
+	Client IP: 127.0.0.1
+	Client PORT: 3018
+	Transfer time: 839.7102355957031 miliseconds
+
+	Client ID: 19
+	Client IP: 127.0.0.1
+	Client PORT: 3019
+	Transfer time: 461.7881774902344 miliseconds
+
+	Client ID: 20
+	Client IP: 127.0.0.1
+	Client PORT: 3020
+	Transfer time: 333.79101753234863 miliseconds
+
+	Client ID: 21
+	Client IP: 127.0.0.1
+	Client PORT: 3021
+	Transfer time: 471.36998176574707 miliseconds
+
+	Client ID: 22
+	Client IP: 127.0.0.1
+	Client PORT: 3022
+	Transfer time: 339.66517448425293 miliseconds
+
+	Client ID: 23
+	Client IP: 127.0.0.1
+	Client PORT: 3023
+	Transfer time: 339.42103385925293 miliseconds
+
+	Client ID: 24
+	Client IP: 127.0.0.1
+	Client PORT: 3024
+	Transfer time: 358.1428527832031 miliseconds
+
